@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prajwal Timsina | Portfolio</title>
-    <meta name="description" content="Portfolio of Prajwal Timsina - Writer & Developer">
+    <meta name="description" content="Portfolio of Prajwal Timsina - Cloud Security Professional & Writer">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-color: #0f172a;
-            --text-color: #e2e8f0;
-            --accent-color: #38bdf8;
-            --secondary-bg: #1e293b;
-            --card-bg: #334155;
+            --bg-color: #0f172a;       /* Dark Blue (Slate 900) */
+            --secondary-bg: #1e293b;   /* Slightly Lighter Blue (Slate 800) */
+            --card-bg: #334155;        /* Card Background */
+            --text-color: #e2e8f0;     /* Off-white text */
+            --accent-color: #38bdf8;   /* Sky Blue Accent */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling for nav links */
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
@@ -33,28 +37,57 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 10%;
-            background-color: rgba(15, 23, 42, 0.9);
+            background-color: rgba(15, 23, 42, 0.95);
             position: sticky;
             top: 0;
             backdrop-filter: blur(10px);
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); text-decoration: none; }
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            color: var(--text-color); 
+            text-decoration: none; 
+        }
+        .logo span { color: var(--accent-color); }
         
         .nav-links a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 20px;
+            margin-left: 30px;
+            font-size: 0.95rem;
             font-weight: 500;
             transition: color 0.3s;
         }
         
         .nav-links a:hover { color: var(--accent-color); }
 
+        /* General Section Styles */
+        section { padding: 80px 10%; }
+        
+        h2 { 
+            font-size: 2.5rem; 
+            margin-bottom: 40px; 
+            color: var(--text-color);
+        }
+        
+        /* Highlight bar next to headings */
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 30px;
+            background-color: var(--accent-color);
+            margin-right: 15px;
+            vertical-align: middle;
+            border-radius: 2px;
+        }
+
         /* Hero Section */
         .hero {
-            height: 90vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -62,72 +95,94 @@
             padding: 0 10%;
         }
 
-        .hero h1 { font-size: 4rem; margin-bottom: 20px; line-height: 1.1; }
-        .hero span { color: var(--accent-color); }
-        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; opacity: 0.8; }
+        .hero p.intro { color: var(--accent-color); font-weight: 600; margin-bottom: 10px; }
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; line-height: 1.1; font-weight: 800; }
+        .hero h1 span { color: #94a3b8; } /* Muted text for the second line */
+        .hero p.desc { font-size: 1.1rem; max-width: 600px; margin-bottom: 30px; color: #cbd5e1; }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 12px 28px;
             background-color: var(--accent-color);
             color: var(--bg-color);
             text-decoration: none;
             font-weight: 600;
-            border-radius: 5px;
-            transition: transform 0.2s;
+            border-radius: 4px;
+            transition: all 0.3s ease;
         }
         
-        .btn:hover { transform: translateY(-3px); }
-        .btn-outline { background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); margin-left: 10px; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -10px rgba(56, 189, 248, 0.5); }
+        .btn-outline { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); margin-left: 15px; }
+        .btn-outline:hover { background: rgba(56, 189, 248, 0.1); }
 
-        /* Sections */
-        section { padding: 80px 10%; }
-        
-        h2 { font-size: 2.5rem; margin-bottom: 40px; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+        /* About Section */
+        #about { background-color: var(--secondary-bg); }
+        .about-content { max-width: 800px; }
+        .about-text { font-size: 1.1rem; margin-bottom: 20px; color: #cbd5e1; }
 
-        /* Grid for Medium Articles/Projects */
+        /* Grid for Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
 
         .card {
             background-color: var(--secondary-bg);
-            padding: 25px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            border: 1px solid transparent;
+            padding: 30px;
+            border-radius: 8px;
+            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
-        .card h3 { margin-bottom: 15px; }
-        .card p { font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px; }
-        .card-link { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+        .card h3 { margin-bottom: 15px; font-size: 1.25rem; }
+        .card p { font-size: 0.95rem; color: #cbd5e1; margin-bottom: 20px; }
+        .card-link { color: var(--accent-color); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .card-link:hover { text-decoration: underline; }
 
-        /* Footer */
+        /* Contact & Footer */
+        #contact { text-align: center; max-width: 800px; margin: 0 auto; }
+        
         footer {
             text-align: center;
-            padding: 40px;
-            background-color: var(--secondary-bg);
-            margin-top: 50px;
+            padding: 30px;
+            font-size: 0.9rem;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        .social-links a { color: var(--text-color); font-size: 1.5rem; margin: 0 15px; transition: color 0.3s; }
+        .social-links a { 
+            color: #94a3b8; 
+            font-size: 1.5rem; 
+            margin: 0 15px; 
+            transition: color 0.3s; 
+        }
         .social-links a:hover { color: var(--accent-color); }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            nav { padding: 15px 5%; flex-direction: column; }
+            .nav-links { margin-top: 15px; }
+            .nav-links a { margin: 0 10px; font-size: 0.9rem; }
+            
             .hero h1 { font-size: 2.5rem; }
-            nav { padding: 20px 5%; }
-            .nav-links { display: none; } /* Add JS for hamburger menu if needed */
+            section { padding: 60px 5%; }
+            
+            h2 { font-size: 2rem; }
+            .btn { width: 100%; text-align: center; margin-bottom: 10px; }
+            .btn-outline { margin-left: 0; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#" class="logo">Prajwal.</a>
+        <a href="#" class="logo">Prajwal<span>.</span></a>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#writing">Writing</a>
@@ -136,71 +191,80 @@
     </nav>
 
     <header class="hero">
-        <p>Hi, my name is</p>
-        <h1>Prajwal Timsina.<span></span><br>I build and I write.</h1>
-        <p>I am a passionate professional focusing on engineering and technology. I document my journey and share my knowledge on Medium.</p>
-        <div>
-            <a href="https://prajwaltimsina.medium.com/" target="_blank" class="btn">Read My Articles</a>
-            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        <p class="intro">Hi, my name is</p>
+        <h1>Prajwal Timsina.<br><span>I build secure clouds.</span></h1>
+        <p class="desc">I am a professional transitioning from Systems Engineering to Cloud Security & DevSecOps. I bridge the gap between infrastructure and security using Terraform and Python.</p>
+        <div style="margin-top: 20px; width: 100%;">
+            <a href="#writing" class="btn">View My Work</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
         </div>
     </header>
+
+    <section id="about">
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p class="about-text">
+                I am a technical professional based in Canberra with a strong background in systems administration. I am currently pivoting my career towards <strong>Cloud Security and DevSecOps</strong>.
+            </p>
+            <p class="about-text">
+                My passion lies in automating security controls and ensuring cloud infrastructure is resilient by design. When I'm not configuring networks or writing infrastructure-as-code, I document my learning journey on Medium to help others solve complex technical challenges.
+            </p>
+            <div style="margin-top: 30px;">
+                <a href="https://linkedin.com/in/YOUR-LINKEDIN-HANDLE" target="_blank" class="btn">
+                    <i class="fa-brands fa-linkedin"></i> Connect on LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
 
     <section id="writing">
         <h2>Latest on Medium</h2>
         <div class="grid">
             <div class="card">
-                <i class="fa-brands fa-medium fa-2x" style="margin-bottom:15px;"></i>
-                <h3>Check out my Profile</h3>
-                <p>Explore my latest stories, insights, and technical articles directly on Medium.</p>
-                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Visit Medium &rarr;</a>
+                <div>
+                    <i class="fa-brands fa-medium fa-2x" style="color: var(--text-color); margin-bottom: 20px;"></i>
+                    <h3>The DevSecOps Journey</h3>
+                    <p>Follow my technical deep dives, tutorials, and thoughts on the future of cloud security.</p>
+                </div>
+                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Visit Profile &rarr;</a>
             </div>
+
             <div class="card">
-                <h3>Recent Project / Topic</h3>
-                <p>A deep dive into my latest work and what I'm currently learning.</p>
-                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Read More &rarr;</a>
+                <div>
+                    <i class="fa-solid fa-cloud fa-2x" style="color: var(--accent-color); margin-bottom: 20px;"></i>
+                    <h3>Cloud Infrastructure</h3>
+                    <p>Insights on building scalable and secure architecture using AWS and Azure.</p>
+                </div>
+                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Read Articles &rarr;</a>
             </div>
+
             <div class="card">
-                <h3>Engineering & Tech</h3>
-                <p>My thoughts on the intersection of modern technology and engineering principles.</p>
-                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Read More &rarr;</a>
+                <div>
+                    <i class="fa-solid fa-shield-halved fa-2x" style="color: var(--accent-color); margin-bottom: 20px;"></i>
+                    <h3>Security Automation</h3>
+                    <p>How I use Python and Terraform to automate compliance and security checks.</p>
+                </div>
+                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Read Articles &rarr;</a>
             </div>
         </div>
     </section>
 
-    <section id="contact" style="text-align: center;">
+    <section id="contact">
         <h2>Get In Touch</h2>
-        <p style="max-width: 600px; margin: 0 auto 30px auto; opacity: 0.8;">
-            Whether you have a question or just want to say hi, my inbox is always open.
+        <p style="color: #cbd5e1; margin-bottom: 30px; font-size: 1.1rem;">
+            I am currently open to opportunities in Cloud Security and SecOps. Whether you have a question or just want to say hi, I'll try my best to get back to you!
         </p>
         <a href="mailto:contact@prajwal.cloud" class="btn">Say Hello</a>
         
         <div class="social-links" style="margin-top: 50px;">
-            <a href="https://github.com/prajwaltimsina" target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://prajwaltimsina.medium.com/" target="_blank"><i class="fa-brands fa-medium"></i></a>
-            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-        </div>
-    </section>
-
-    <section id="about" style="background-color: var(--secondary-bg);">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h2>About Me</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 20px;">
-                I am a technical professional transitioning from system administration to <strong>Cloud Security and DevSecOps</strong>. 
-                I bridge the gap between infrastructure and security, using tools like Terraform and Python to build safer cloud environments.
-            </p>
-            <p style="font-size: 1.1rem; margin-bottom: 30px;">
-                When I'm not coding, I write technical guides on Medium to help others solve the problems I've encountered.
-            </p>
-            
-            <a href="https://linkedin.com/in/YOUR-LINKEDIN-HANDLE" target="_blank" class="btn">
-                <i class="fa-brands fa-linkedin"></i> View Full Resume
-            </a>
+            <a href="https://github.com/prajwaltimsina" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://prajwaltimsina.medium.com/" target="_blank" aria-label="Medium"><i class="fa-brands fa-medium"></i></a>
+            <a href="https://linkedin.com/in/YOUR-LINKEDIN-HANDLE" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Prajwal Timsina. Built & hosted on GitHub.</p>
+        <p>&copy; 2025 Prajwal Timsina. Hosted on prajwal.cloud</p>
     </footer>
 
 </body>
