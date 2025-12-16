@@ -1,25 +1,190 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Praz Timsina</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prajwal Timsina | Portfolio</title>
+    <meta name="description" content="Portfolio of Prajwal Timsina - Writer & Developer">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --accent-color: #38bdf8;
+            --secondary-bg: #1e293b;
+            --card-bg: #334155;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: rgba(15, 23, 42, 0.9);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--accent-color); text-decoration: none; }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 10%;
+        }
+
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero span { color: var(--accent-color); }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin-bottom: 30px; opacity: 0.8; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover { transform: translateY(-3px); }
+        .btn-outline { background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); margin-left: 10px; }
+
+        /* Sections */
+        section { padding: 80px 10%; }
+        
+        h2 { font-size: 2.5rem; margin-bottom: 40px; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+
+        /* Grid for Medium Articles/Projects */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--secondary-bg);
+            padding: 25px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .card h3 { margin-bottom: 15px; }
+        .card p { font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px; }
+        .card-link { color: var(--accent-color); text-decoration: none; font-weight: 600; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--secondary-bg);
+            margin-top: 50px;
+        }
+
+        .social-links a { color: var(--text-color); font-size: 1.5rem; margin: 0 15px; transition: color 0.3s; }
+        .social-links a:hover { color: var(--accent-color); }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            nav { padding: 20px 5%; }
+            .nav-links { display: none; } /* Add JS for hamburger menu if needed */
+        }
+    </style>
+</head>
 <body>
 
+    <nav>
+        <a href="#" class="logo">Prajwal.</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#writing">Writing</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-  <h1 id="title">Praz(Prajwal) Timsina </h1>
-  
+    <header class="hero">
+        <p>Hi, my name is</p>
+        <h1>Prajwal Timsina.<span></span><br>I build and I write.</h1>
+        <p>I am a passionate professional focusing on engineering and technology. I document my journey and share my knowledge on Medium.</p>
+        <div>
+            <a href="https://prajwaltimsina.medium.com/" target="_blank" class="btn">Read My Articles</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+    </header>
 
+    <section id="writing">
+        <h2>Latest on Medium</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fa-brands fa-medium fa-2x" style="margin-bottom:15px;"></i>
+                <h3>Check out my Profile</h3>
+                <p>Explore my latest stories, insights, and technical articles directly on Medium.</p>
+                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Visit Medium &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>Recent Project / Topic</h3>
+                <p>A deep dive into my latest work and what I'm currently learning.</p>
+                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Read More &rarr;</a>
+            </div>
+            <div class="card">
+                <h3>Engineering & Tech</h3>
+                <p>My thoughts on the intersection of modern technology and engineering principles.</p>
+                <a href="https://prajwaltimsina.medium.com/" target="_blank" class="card-link">Read More &rarr;</a>
+            </div>
+        </div>
+    </section>
 
-<script src="index.js" charset="utf-8"></script>
+    <section id="contact" style="text-align: center;">
+        <h2>Get In Touch</h2>
+        <p style="max-width: 600px; margin: 0 auto 30px auto; opacity: 0.8;">
+            Whether you have a question or just want to say hi, my inbox is always open.
+        </p>
+        <a href="mailto:contact@prajwal.cloud" class="btn">Say Hello</a>
+        
+        <div class="social-links" style="margin-top: 50px;">
+            <a href="https://github.com/prajwaltimsina" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://prajwaltimsina.medium.com/" target="_blank"><i class="fa-brands fa-medium"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Prajwal Timsina. Built & hosted on GitHub.</p>
+    </footer>
+
 </body>
-<footer>
-  praz@prajwal.cloud
-  linkedin.com/in/prajwaltimsina
-  prajwaltimsina.medium.com
-</footer>
 </html>
