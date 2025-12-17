@@ -10,6 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
+
+        /* Add/Update this specific style for the card paragraph */
+        .card p {
+                font-size: 0.95rem;
+                color: #cbd5e1;
+                margin-bottom: 20px;
+                
+                /* This creates the "..." effect and forces equal height */
+                display: -webkit-box;
+                -webkit-line-clamp: 3;  /* Show exactly 3 lines */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                height: 4.5em; /* Ensures the space is reserved even if text is short */
+                }
+        
         :root {
             --bg-color: #0f172a;       /* Dark Blue (Slate 900) */
             --secondary-bg: #1e293b;   /* Slightly Lighter Blue (Slate 800) */
@@ -243,7 +258,7 @@
     </footer>
 
 <script>
-    const mediumUsername = 'prajwaltimsina'; // Your Medium username
+    const mediumUsername = 'prajwaltimsina'; 
     const rssUrl = `https://medium.com/feed/@${mediumUsername}`;
     const rssJsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
@@ -254,22 +269,28 @@
 
             if (data.status === 'ok') {
                 const postsContainer = document.getElementById('medium-posts');
-                const posts = data.items.slice(0, 3); // Get only the latest 3 items
+                const posts = data.items.slice(0, 3); 
 
-                // Clear the loading message
                 postsContainer.innerHTML = '';
 
                 posts.forEach(post => {
-                    // Create the description snippet (strip HTML tags and limit length)
+                    // 1. Create a temp div to strip HTML tags
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = post.description;
-                    const cleanText = tempDiv.textContent || tempDiv.innerText || '';
-                    const snippet = cleanText.substring(0, 100) + '...';
+                    
+                    // 2. Get raw text
+                    let cleanText = tempDiv.textContent || tempDiv.innerText || '';
 
-                    // Use the thumbnail if available, otherwise a default icon
+                    // 3. REMOVE URLS: This regex finds http/https links and removes them
+                    cleanText = cleanText.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
+
+                    // 4. Truncate slightly longer than needed (CSS handles the visual cut-off)
+                    const snippet = cleanText.substring(0, 200);
+
+                    // 5. Check for thumbnail
                     const imageHtml = post.thumbnail 
                         ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 20px;">`
-                        : `<i class="fa-brands fa-medium fa-2x" style="color: var(--accent-color); margin-bottom: 20px;"></i>`;
+                        : `<div style="width:100%; height:150px; background:#1e293b; display:flex; align-items:center; justify-content:center; margin-bottom:20px; border-radius:4px;"><i class="fa-brands fa-medium fa-2x" style="color: var(--accent-color);"></i></div>`;
 
                     const articleHtml = `
                         <div class="card">
@@ -287,12 +308,9 @@
             }
         } catch (error) {
             console.error('Error fetching Medium posts:', error);
-            document.getElementById('medium-posts').innerHTML = 
-                '<p style="color: #cbd5e1;">Unable to load posts at this time.</p>';
         }
     }
 
-    // Run the function when the page loads
     fetchMediumPosts();
 </script>
     
