@@ -219,33 +219,8 @@
 
     <section id="writing">
         <h2>Latest on Medium</h2>
-        <div class="grid">
-            <div class="card">
-                <div>
-                    <i class="fa-brands fa-aws fa-2x" style="color: var(--text-color); margin-bottom: 20px;"></i>
-                    <h3>Passwordless DevSecOps on AWS</h3>
-                    <p>A guide on modern and secure approach to provision AWS infrastructure without storing any static credentials.</p>
-                </div>
-                <a href="https://prajwaltimsina.medium.com/passwordless-devsecops-on-aws-using-terraform-github-actions-and-oidc-06b32a1c0b67" target="_blank" class="card-link">Visit Profile &rarr;</a>
-            </div>
-
-            <div class="card">
-                <div>
-                    <i class="fa-solid fa-computer fa-2x" style="color: var(--accent-color); margin-bottom: 20px;"></i>
-                    <h3>Leveraging AI for Threat Hunting</h3>
-                    <p>Here's how I used AI for SecOps.</p>
-                </div>
-                <a href="https://prajwaltimsina.medium.com/%EF%B8%8F-leveraging-wazuh-ai-for-threat-hunting-my-end-to-end-lab-walkthrough-6de44a39b67a" target="_blank" class="card-link">Read Articles &rarr;</a>
-            </div>
-
-            <div class="card">
-                <div>
-                    <i class="fa-solid fa-shield-halved fa-2x" style="color: var(--accent-color); margin-bottom: 20px;"></i>
-                    <h3>Security Automation</h3>
-                    <p>Insights on using Ansible and Cron to automate server patching.</p>
-                </div>
-                <a href="https://prajwaltimsina.medium.com/automating-linux-patching-with-cron-and-ansible-6eeae0006d26" target="_blank" class="card-link">Read Articles &rarr;</a>
-            </div>
+        <div class="grid" id="medium-posts">
+            <p style="color: var(--text-color);">Loading articles...</p>
         </div>
     </section>
 
@@ -267,5 +242,59 @@
         <p>&copy; 2025 Prajwal Timsina. Hosted on prajwal.cloud</p>
     </footer>
 
+<script>
+    const mediumUsername = 'prajwaltimsina'; // Your Medium username
+    const rssUrl = `https://medium.com/feed/@${mediumUsername}`;
+    const rssJsonApi = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+    async function fetchMediumPosts() {
+        try {
+            const response = await fetch(rssJsonApi);
+            const data = await response.json();
+
+            if (data.status === 'ok') {
+                const postsContainer = document.getElementById('medium-posts');
+                const posts = data.items.slice(0, 3); // Get only the latest 3 items
+
+                // Clear the loading message
+                postsContainer.innerHTML = '';
+
+                posts.forEach(post => {
+                    // Create the description snippet (strip HTML tags and limit length)
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = post.description;
+                    const cleanText = tempDiv.textContent || tempDiv.innerText || '';
+                    const snippet = cleanText.substring(0, 100) + '...';
+
+                    // Use the thumbnail if available, otherwise a default icon
+                    const imageHtml = post.thumbnail 
+                        ? `<img src="${post.thumbnail}" alt="${post.title}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 20px;">`
+                        : `<i class="fa-brands fa-medium fa-2x" style="color: var(--accent-color); margin-bottom: 20px;"></i>`;
+
+                    const articleHtml = `
+                        <div class="card">
+                            <div>
+                                ${imageHtml}
+                                <h3>${post.title}</h3>
+                                <p>${snippet}</p>
+                            </div>
+                            <a href="${post.link}" target="_blank" class="card-link">Read Article &rarr;</a>
+                        </div>
+                    `;
+                    
+                    postsContainer.innerHTML += articleHtml;
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching Medium posts:', error);
+            document.getElementById('medium-posts').innerHTML = 
+                '<p style="color: #cbd5e1;">Unable to load posts at this time.</p>';
+        }
+    }
+
+    // Run the function when the page loads
+    fetchMediumPosts();
+</script>
+    
 </body>
 </html>
